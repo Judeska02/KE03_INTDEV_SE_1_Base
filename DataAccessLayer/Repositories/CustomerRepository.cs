@@ -13,7 +13,7 @@ namespace DataAccessLayer.Repositories
     {
         private readonly MatrixIncDbContext _context;
 
-        public CustomerRepository(MatrixIncDbContext context)
+        public CustomerRepository(MatrixIncDbContext context) 
         {
             _context = context;
         }

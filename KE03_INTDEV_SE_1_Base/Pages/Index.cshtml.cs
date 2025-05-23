@@ -1,28 +1,30 @@
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KE03_INTDEV_SE_1_Base.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IPartRepository _partRepository;
 
-        public IList<Customer> Customers { get; set; }
+        public IList<Part> Parts { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ICustomerRepository customerRepository)
+        public IndexModel(ILogger<IndexModel> logger, IPartRepository partRepository)
         {
             _logger = logger;
-            _customerRepository = customerRepository;
-            Customers = new List<Customer>();
+            _partRepository = partRepository;
+            Parts = new List<Part>();
         }
 
         public void OnGet()
-        {            
-            Customers = _customerRepository.GetAllCustomers().ToList();                            
-            _logger.LogInformation($"getting all {Customers.Count} customers");
+        {
+            Parts = _partRepository.GetAllParts().ToList();
+            _logger.LogInformation($"Aantal onderdelen geladen: {Parts.Count}");
         }
     }
 }
